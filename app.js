@@ -15,10 +15,12 @@ var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 require('./config/passport')(passport);
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({secret: 'anystringoftext',
+app.use(session({secret: 'ilovesteaksandktzitzot',
 				 saveUninitialized: true,
 				 resave: true}));
 
@@ -27,9 +29,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
-
-
-app.set('view engine', 'ejs');
+app.set('view engine', 'jade');
 
 
 // app.use('/', function(req, res){
@@ -43,7 +43,3 @@ require('./app/routes.js')(app, passport);
 
 app.listen(port);
 console.log('Server running on port: ' + port);
-
-
-
-

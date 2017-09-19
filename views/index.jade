@@ -1,0 +1,109 @@
+extends layout
+
+block content
+  header(id="home")
+    nav(id="nav-wrap")
+      a.mobile-btn(href="#nav-wrap", title="Show navigation") Show navigation
+      a.mobile-btn(href="#", title="Hide navigation") Hide navigation
+      ul.nav(id="nav")
+        li.current
+          a.smoothscroll(href="#home") Home
+        li
+          a.smoothscroll(href="#about") About
+        li
+          a.smoothscroll(href="#portfolio") Portfolio
+    div.row.banner
+      div.banner-text
+        h1 כותרת גדולה
+        a(href="/auth/facebook") Login
+    p.scrolldown
+      a.scrollsmooth(href="#about")
+        
+
+  // SECTION about
+  section(id="about")
+    div.row
+      div.twelve.columns.collapsed
+        div.bgrid-quarters.s-bgrid-thirds.cf(id="portfolio-wrapper")
+          div.item-wrap
+            ul
+              li.inline-block.rpad
+                a(href="#modal-01", title)
+                  img.profile-pic(src="images/profilepic.jpg", alt)
+                em.score 9999
+              li.inline-block.rpad
+                a(href="#modal-01", title)
+                  img.profile-pic(src="images/profilepic.jpg", alt)
+                em.score 9999
+  
+  // END SECTION about
+  // SECTION portfolio
+  section(id="portfolio")
+    div.row
+      div.twelve.columns.collapsed
+        h1 קלוט מה יש פה
+        div.bgrid-quarters.s-bgrid-thirds.cf(id="portfolio-wrapper")
+          div.columns.portfolio-item
+            div.item-wrap
+              a(href="#modal-01", title)
+                img(src="images/portfolio/coffee.jpg" alt)
+                div.overlay
+                  div.portfolio-item-meta
+                    h5 Coffee
+                    p Illustration
+                div.link-icon
+                  i.icon-plus
+
+          div.columns.portfolio-item
+            div.item-wrap
+              a(href="#modal-02", title)
+                img(src="images/portfolio/console.jpg" alt)
+                div.overlay
+                  div.portfolio-item-meta
+                    h5 Console
+                    p Web Development
+                div.link-icon
+                  i.icon-plus
+
+      
+      div.popup-modal.mfp-hide(id="modal-01")
+        img.scale-with-grid(src="images/portfolio/modals/m-coffee.jpg" alt)
+        div.description-box
+          h4 Coffee Cup
+          p This is the paragraphe on coffee
+          span.categories
+            i.fa.fa-tag Branding, Webdesign
+        div.link-box
+          a(href="http://www.behance.net") Details
+          a.popup-modal-dismiss Close
+
+  footer
+    div.row
+      div.twelve.columns
+        ul.social-links
+          li
+            a(href="#")
+              i.fa.fa-facebook
+          li
+            a(href="#")
+              i.fa.fa-instagram
+        ul.copyright
+          li
+            | © Copyright 2017 Biton and Saposnik
+          li
+            | Designed by 
+            a(href="http://www.styleshout.com/", title="Stylehout") Stylehout
+      div(id="go-top")
+        a.smoothscroll(href="#home", title="Back to Top")
+          i.icon-up-open
+
+  script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+  script
+    //- | window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')
+  script(src="js/jquery-1.10.2.min.js")
+  script(src="js/jquery-migrate-1.2.1.min.js", type="text/javascript")
+  script(src="js/jquery.flexslider.js")
+  script(src="js/waypoints.js")
+  script(src="js/jquery.fittext.js")
+  script(src="js/magnific-popup.js")
+  script(src="js/init.js")
