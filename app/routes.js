@@ -3,13 +3,17 @@ module.exports = function(app, passport){
 	// app.use('/', index);
     /* GET home page. */
     app.get('/', function(req, res, next) {
-        res.render('index', { title: 'יא קציצה' });
+		var isUserLogged;
+
+		if (req.session['user'] != undefined) {
+			isUserLogged = true;
+		} else {
+			isUserLogged = false;
+		}
+
+        res.render('index', { title: 'יא קציצה', isUserLogged: isUserLogged });
 	});
 	
-    app.get('/index', function(req, res, next) {
-        res.render('index', { title: 'יא קציצה' });
-    });
-
 	// app.get('/login', function(req, res){
 	// 	res.render('login.ejs', { message: req.flash('loginMessage') });
 	// });
@@ -38,17 +42,16 @@ module.exports = function(app, passport){
 
 	app.get('/auth/facebook/callback', 
 		passport.authenticate('facebook', {
-			// successRedirect: '/profile',
-			successRedirect: '/index',
+			successRedirect: '/',
 			failureRedirect: '/'
 		})
 	);
 
 
-	app.get('/logout', function(req, res){
-		req.logout();
-		res.redirect('/');
-	})
+	// app.get('/logout', function(req, res){
+	// 	req.logout();
+	// 	res.redirect('/');
+	// })
 };
 
 function isLoggedIn(req, res, next) {

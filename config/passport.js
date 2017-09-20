@@ -19,62 +19,11 @@ module.exports = function(passport) {
     });
 
 
-    passport.use('local-signup', new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'password',
-        passReqToCallback: true
-    },
-    function(req, email, password, done){
-        process.nextTick(function(){
-            User.findOne({'local.username': email}, function(err, user){
-                if(err)
-                    return done(err);
-                if(user){
-                    return done(null, false, req.flash('signupMessage', 'That email already taken'));
-                } else {
-                    var newUser = new User();
-                    newUser.local.username = email;
-                    newUser.local.password = newUser.generateHash(password);
-
-                    newUser.save(function(err){
-                        if(err)
-                            throw err;
-                        return done(null, newUser);
-                    })
-                }
-            })
-
-        });
-    }));
-
-    passport.use('local-login', new LocalStrategy({
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true
-        },
-        function(req, email, password, done){
-            process.nextTick(function(){
-                User.findOne({ 'local.username': email}, function(err, user){
-                    if(err)
-                        return done(err);
-                    if(!user)
-                        return done(null, false, req.flash('loginMessage', 'No User found'));
-                    if(!user.validPassword(password)){
-                        return done(null, false, req.flash('loginMessage', 'invalid password'));
-                    }
-                    return done(null, user);
-
-                });
-            });
-        }
-    ));
-
-
     passport.use(new FacebookStrategy({
         clientID: configAuth.facebookAuth.clientID,
         clientSecret: configAuth.facebookAuth.clientSecret,
         callbackURL: configAuth.facebookAuth.callbackURL,
-        profileFields: [ 'email' , 'name' ]
+        profileFields: [ 'email' , 'name', 'picture.type(large)' ]
       },
       function(accessToken, refreshToken, profile, done) {
             process.nextTick(function(){
@@ -89,6 +38,7 @@ module.exports = function(passport) {
                         newUser.facebook.token = accessToken;
                         newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.facebook.email = profile.emails[0].value;
+                        newUser.facebook.photo = profile.photos[0].value;
 
                         newUser.save(function(err){
                             if(err)
