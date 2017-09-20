@@ -14,7 +14,7 @@ block content
           a.smoothscroll(href="#portfolio") Portfolio
     div.row.banner
       div.banner-text
-        h1 כותרת גדולה
+        h1=title
         if isUserLogged
           h2 מחובר
         a(href="/auth/facebook") Login
@@ -22,62 +22,68 @@ block content
       a.scrollsmooth(href="#about")
         
 
-  // SECTION about
-  section(id="about")
-    div.row
-      div.twelve.columns.collapsed
-        div.bgrid-quarters.s-bgrid-thirds.cf(id="portfolio-wrapper")
-          div.item-wrap
-            ul
-              li.inline-block.rpad
-                a(href="#modal-01", title)
-                  img.profile-pic(src="images/profilepic.jpg", alt)
-                em.score 9999
-              li.inline-block.rpad
-                a(href="#modal-01", title)
-                  img.profile-pic(src="images/profilepic.jpg", alt)
-                em.score 9999
-  
-  // END SECTION about
-  // SECTION portfolio
-  section(id="portfolio")
-    div.row
-      div.twelve.columns.collapsed
-        h1 קלוט מה יש פה
-        div.bgrid-quarters.s-bgrid-thirds.cf(id="portfolio-wrapper")
-          div.columns.portfolio-item
+  if !isUserLogged
+    section(id="about")
+    //- TODO: LOGIN
+      div.row
+        h1 LOGIN
+  else
+    // SECTION about
+    section(id="about")
+      div.row
+        div.twelve.columns.collapsed
+          div.bgrid-quarters.s-bgrid-thirds.cf(id="portfolio-wrapper")
             div.item-wrap
-              a(href="#modal-01", title)
-                img(src="images/portfolio/coffee.jpg" alt)
-                div.overlay
-                  div.portfolio-item-meta
-                    h5 Coffee
-                    p Illustration
-                div.link-icon
-                  i.icon-plus
+              ul
+                li.inline-block.rpad
+                  a(href="#modal-01", title)
+                    img.profile-pic(src="images/profilepic.jpg", alt)
+                  em.score 9999
+                li.inline-block.rpad
+                  a(href="#modal-01", title)
+                    img.profile-pic(src="images/profilepic.jpg", alt)
+                  em.score 9999
+    
+    // END SECTION about
+    // SECTION portfolio
+    section(id="portfolio")
+      div.row
+        div.twelve.columns.collapsed
+          h1(style="font-size: xx-large;") המטורפים של היום
+          div.bgrid-quarters.s-bgrid-thirds.cf(id="portfolio-wrapper")
+            div.columns.portfolio-item
+              div.item-wrap
+                a(href="#modal-01", title)
+                  img(src="images/portfolio/coffee.jpg" alt)
+                  div.overlay
+                    div.portfolio-item-meta
+                      h5 Coffee
+                      p Illustration
+                  div.link-icon
+                    i.icon-plus
 
-          div.columns.portfolio-item
-            div.item-wrap
-              a(href="#modal-02", title)
-                img(src="images/portfolio/console.jpg" alt)
-                div.overlay
-                  div.portfolio-item-meta
-                    h5 Console
-                    p Web Development
-                div.link-icon
-                  i.icon-plus
+            div.columns.portfolio-item
+              div.item-wrap
+                a(href="#modal-02", title)
+                  img(src="images/portfolio/console.jpg" alt)
+                  div.overlay
+                    div.portfolio-item-meta
+                      h5 Console
+                      p Web Development
+                  div.link-icon
+                    i.icon-plus
 
-      
-      div.popup-modal.mfp-hide(id="modal-01")
-        img.scale-with-grid(src="images/portfolio/modals/m-coffee.jpg" alt)
-        div.description-box
-          h4 Coffee Cup
-          p This is the paragraphe on coffee
-          span.categories
-            i.fa.fa-tag Branding, Webdesign
-        div.link-box
-          a(href="http://www.behance.net") Details
-          a.popup-modal-dismiss Close
+        
+        div.popup-modal.mfp-hide(id="modal-01")
+          img.scale-with-grid(src="images/portfolio/modals/m-coffee.jpg" alt)
+          div.description-box
+            h4 Coffee Cup
+            p This is the paragraphe on coffee
+            span.categories
+              i.fa.fa-tag Branding, Webdesign
+          div.link-box
+            a(href="http://www.behance.net") Details
+            a.popup-modal-dismiss Close
 
   footer
     div.row
@@ -95,9 +101,10 @@ block content
           li
             | Designed by 
             a(href="http://www.styleshout.com/", title="Stylehout") Stylehout
-      div(id="go-top")
-        a.smoothscroll(href="#home", title="Back to Top")
-          i.icon-up-open
+      if isUserLogged
+        div(id="go-top")
+          a.smoothscroll(href="#home", title="Back to Top")
+            i.icon-up-open
 
   script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
   script
