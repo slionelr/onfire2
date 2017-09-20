@@ -14,6 +14,13 @@ var path = require('path');
 
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'DEBUG: mongo connection error:'));
+db.once('open', function() {
+	console.log('DEBUG: mongo CONNECTED');
+  // we're connected!
+});
+
 require('./config/passport')(passport);
 
 app.use(express.static(path.join(__dirname, 'public')));
