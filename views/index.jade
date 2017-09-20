@@ -31,6 +31,11 @@ block content
           div.bgrid-quarters.s-bgrid-thirds.cf(id="portfolio-wrapper")
             div.item-wrap
               ul
+                if isUserLogged
+                  li.inline-block.rpad
+                    a(href="#modal-01", title)
+                      img.profile-pic(src='#{user.facebook.photo}', alt)
+                    em.score 9999
                 li.inline-block.rpad
                   a(href="#modal-01", title)
                     img.profile-pic(src="images/profilepic.jpg", alt)

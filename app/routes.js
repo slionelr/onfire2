@@ -11,11 +11,11 @@ module.exports = function(app, passport){
 			isUserLogged = false;
 		}
 
-        res.render('index', { title: 'יא קציצה', isUserLogged: isUserLogged });
+        res.render('index', { title: 'יא קציצה 2', isUserLogged: isUserLogged, user: req.session['user'] });
 	});
 	
 	app.get('/profile', isLoggedIn, function(req, res){
-		res.render('profile.ejs', { user: req.user });
+		res.render('profile'); // TODO: manage profile page
 	});
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
