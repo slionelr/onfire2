@@ -13,7 +13,7 @@ var path = require('path');
 
 
 var configDB = require('./config/database.js');
-mongoose.connect(configDB.url);
+mongoose.connect(process.env.MONGODB_URI || configDB.url);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DEBUG: mongo connection error:'));
 db.once('open', function() {
