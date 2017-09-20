@@ -15,18 +15,14 @@ block content
     div.row.banner
       div.banner-text
         h1=title
-        if isUserLogged
-          h2 מחובר
-        a(href="/auth/facebook") Login
     p.scrolldown
       a.scrollsmooth(href="#about")
         
 
   if !isUserLogged
     section(id="about")
-    //- TODO: LOGIN
       div.row
-        h1 LOGIN
+        button(onClick="window.location.href='/auth/facebook'") LOGIN
   else
     // SECTION about
     section(id="about")
